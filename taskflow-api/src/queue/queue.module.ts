@@ -10,9 +10,9 @@ import { BullmqProvider } from './bullmq.provider';
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
         connection: {
-          host: configService.get('REDIS_HOST'),
-          port: configService.get('REDIS_PORT'),
-          password: configService.get('REDIS_PASSWORD'),
+          host: configService.get('REDIS_HOST') || 'localhost',
+          port: parseInt(configService.get('REDIS_PORT') || '6379', 10),
+          password: configService.get('REDIS_PASSWORD') || undefined,
         },
       }),
       inject: [ConfigService],
@@ -22,6 +22,6 @@ import { BullmqProvider } from './bullmq.provider';
     }),
   ],
   providers: [BullmqProvider],
-  exports: [BullModule],
+  exports: [BullmqProvider],
 })
 export class QueueModule {}
