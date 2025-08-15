@@ -3,7 +3,7 @@ node_modules/
 bun.lockb
 .pnp
 .pnp.js
-
+.env
 # Production build
 dist/
 build/
